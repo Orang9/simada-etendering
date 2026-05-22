@@ -6,12 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model
 {
+    protected $table = 'role';
+    protected $primaryKey = 'role_id';
+    public $incrementing = true;
+    protected $keyType = 'int';
+    public $timestamps = true;
     protected $fillable = [
-        'name',
+        'nama_role',
     ];
 
-    public function users()
+    public function pengguna()
     {
-        return $this->hasMany(User::class, 'role_id');
+    return $this->hasMany(Pengguna::class, 'role_id', 'role_id');
     }
 }
