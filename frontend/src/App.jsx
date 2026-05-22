@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 import ProtectedRoute from './components/ProtectedRoute';
 import PublicDashboard from './pages/public/PublicDashboard';
@@ -11,19 +11,20 @@ import VendorDashboard from './pages/vendor/VendorDashboard';
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<PublicDashboard />} />
+      <Route path="/" element={<Navigate to="/public/dashboard" replace />} />
+      <Route path="/public/dashboard" element={<PublicDashboard />} />
       <Route path="/login" element={<LoginPage />} />
       
       <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
-        <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
       </Route>
 
       <Route element={<ProtectedRoute allowedRoles={['pokja']} />}>
-        <Route path="/pokja" element={<PokjaDashboard />} />
+        <Route path="/pokja/dashboard" element={<PokjaDashboard />} />
       </Route>
 
-      <Route element={<ProtectedRoute allowedRoles={['vendor']} />}>
-        <Route path="/vendor" element={<VendorDashboard />} />
+      <Route element={<ProtectedRoute allowedRoles={['penyedia', 'vendor']} />}>
+        <Route path="/vendor/dashboard" element={<VendorDashboard />} />
       </Route>
       
       {/* Fallback route */}
