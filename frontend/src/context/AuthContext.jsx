@@ -21,21 +21,6 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('token');
   };
 
-  // Add token interceptor
-  useEffect(() => {
-    const interceptor = api.interceptors.request.use((config) => {
-      const token = localStorage.getItem('token');
-      if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
-      }
-      return config;
-    });
-
-    return () => {
-      api.interceptors.request.eject(interceptor);
-    };
-  }, []);
-
   return (
     <AuthContext.Provider value={{ user, login, logout }}>
       {children}
