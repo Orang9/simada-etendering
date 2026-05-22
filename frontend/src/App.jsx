@@ -8,6 +8,8 @@ import AdminDashboard from './pages/admin/AdminDashboard';
 import PokjaDashboard from './pages/pokja/PokjaDashboard';
 import VendorDashboard from './pages/vendor/VendorDashboard';
 
+import PaketPengadaanPage from './pages/admin/PaketPengadaanPage';
+
 function App() {
   return (
     <Routes>
@@ -16,10 +18,12 @@ function App() {
       
       <Route element={<ProtectedRoute allowedRoles={['Admin', 'admin']} />}>
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route path="/admin/paket-pengadaan" element={<PaketPengadaanPage />} />
       </Route>
 
       <Route element={<ProtectedRoute allowedRoles={['Pokja', 'pokja']} />}>
         <Route path="/pokja/dashboard" element={<PokjaDashboard />} />
+        <Route path="/pokja/paket-pengadaan" element={<PaketPengadaanPage />} />
       </Route>
 
       <Route element={<ProtectedRoute allowedRoles={['Penyedia', 'penyedia', 'Vendor', 'vendor']} />}>

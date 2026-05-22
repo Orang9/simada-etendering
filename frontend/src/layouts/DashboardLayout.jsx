@@ -24,9 +24,12 @@ const DashboardLayout = ({ children, title = 'Dashboard' }) => {
     navigate('/login');
   };
 
+  const userRole = user?.role?.toLowerCase() || 'public';
+  const rolePrefix = userRole === 'admin' ? '/admin' : userRole === 'pokja' ? '/pokja' : userRole === 'penyedia' ? '/vendor' : '/public';
+
   const menuItems = [
-    { label: 'Dashboard', icon: <LayoutDashboard size={20} />, active: title.includes('Dashboard'), path: '#' },
-    { label: 'Data Pengadaan', icon: <FileText size={20} />, active: title === 'Data Pengadaan', path: '#' },
+    { label: 'Dashboard', icon: <LayoutDashboard size={20} />, active: title.includes('Dashboard'), path: `${rolePrefix}/dashboard` },
+    { label: 'Data Pengadaan', icon: <FileText size={20} />, active: title === 'Data Pengadaan', path: (userRole === 'admin' || userRole === 'pokja') ? `${rolePrefix}/paket-pengadaan` : '#' },
     { label: 'Dokumen', icon: <FolderOpen size={20} />, active: title === 'Dokumen', path: '#' },
     { label: 'Penawaran', icon: <Send size={20} />, active: title === 'Penawaran', path: '#' },
     { label: 'Evaluasi', icon: <CheckSquare size={20} />, active: title === 'Evaluasi', path: '#' },
