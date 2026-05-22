@@ -15,6 +15,7 @@ Project ini dibuat sebagai prototype sistem pengadaan elektronik pemerintah daer
 - Protected frontend routes
 - Session/token authentication
 
+### Halaman Login
 ![Login Page](./screenshots/login-page.png)
 
 ## Procurement Management
@@ -23,13 +24,33 @@ Project ini dibuat sebagai prototype sistem pengadaan elektronik pemerintah daer
 - Manajemen Dokumen Tender
 - Status Paket (`open` / `close`)
 
-<img src="./screenshots/login-page.png" width="800"/>
+### Halaman Data Pengadaan (Admin/Pokja)
+![Data Pengadaan Page](./screenshots/data-pengadaan-page.png)
+
+### Tambah Paket Pengadaan
+![Tambah Paket Pengadaan](./screenshots/tambah-paket-pengadaan.png)
+
+### Detail Paket Pengadaan
+![Detail Paket Pengadaan](./screenshots/detail-paket-pengadaan.png)
+
+### Dokumen Tender
+![Dokumen Tender Page](./screenshots/dokumen-tender-page.png)
+
+### Upload Dokumen Tender
+![Upload Dokumen](./screenshots/upload-dokumen.png)
 
 ## Vendor Bidding
 
 - Penyedia dapat melihat tender terbuka
 - Submit penawaran tender
 - Riwayat penawaran penyedia
+
+### Halaman Penawaran Vendor
+![Penawaran Page](./screenshots/penawaran-page.png)
+![Penawaran Page Setelah Kirim](./screenshots/penawaran-page-after.png)
+
+### Detail dan Submit Penawaran
+![Detail dan Submit Penawaran](./screenshots/detail-dan-submit-penawaran.png)
 
 ## Bid Evaluation
 
@@ -40,10 +61,24 @@ Project ini dibuat sebagai prototype sistem pengadaan elektronik pemerintah daer
   - Lolos
   - Tidak Lolos
 
+### Halaman Evaluasi Penawaran
+![Evaluasi Penawaran Page](./screenshots/evaluasi-penawaran-page.png)
+![Evaluasi Penawaran Page Setelah Evaluasi](./screenshots/evaluasi-penawaran-page-after.png)
+
+### Form/Modal Input Evaluasi
+![Beri Evaluasi](./screenshots/beri-evaluasi.png)
+
 ## Winner Selection
 
 - Penetapan pemenang tender
 - Otomatis menutup paket pengadaan setelah pemenang ditentukan
+
+### Halaman Penetapan Pemenang Tender
+![Daftar Pemenang Tender Page](./screenshots/daftar-pemenang-tender-page.png)
+![Daftar Pemenang Tender Page Setelah Penetapan](./screenshots/daftar-pemenang-tender-page-after.png)
+
+### Form/Modal Tetapkan Pemenang
+![Tetapkan Pemenang Tender](./screenshots/tetapkan-pemenang-tender.png)
 
 ## Dashboard & Reporting
 
@@ -56,6 +91,12 @@ Project ini dibuat sebagai prototype sistem pengadaan elektronik pemerintah daer
 - Export PDF
 - Export Excel
 - Grafik analytics
+
+### Dashboard Analytics (Admin)
+![Dashboard Page](./screenshots/dashboard-page.png)
+
+### Halaman Laporan & Analytics
+![Laporan Page](./screenshots/laporan-page.png)
 
 ---
 
