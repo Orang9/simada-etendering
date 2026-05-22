@@ -32,7 +32,7 @@ const DashboardLayout = ({ children, title = 'Dashboard' }) => {
     { label: 'Data Pengadaan', icon: <FileText size={20} />, active: title === 'Data Pengadaan', path: `${rolePrefix}/paket-pengadaan`, roles: ['admin', 'pokja'] },
     { label: 'Dokumen', icon: <FolderOpen size={20} />, active: title === 'Dokumen', path: '#', roles: ['admin', 'pokja'] },
     { label: 'Penawaran', icon: <Send size={20} />, active: title === 'Penawaran', path: `${rolePrefix}/penawaran`, roles: ['admin', 'penyedia', 'vendor'] },
-    { label: 'Evaluasi', icon: <CheckSquare size={20} />, active: title === 'Evaluasi', path: '#', roles: ['admin', 'pokja'] },
+    { label: 'Evaluasi', icon: <CheckSquare size={20} />, active: title === 'Evaluasi Penawaran', path: `${rolePrefix}/evaluasi`, roles: ['admin', 'pokja'] },
     { label: 'Pemenang Tender', icon: <Award size={20} />, active: title === 'Pemenang Tender', path: '#', roles: ['admin', 'pokja'] },
     { label: 'Laporan', icon: <BarChart size={20} />, active: title === 'Laporan', path: '#', roles: ['admin', 'pokja'] },
   ];
