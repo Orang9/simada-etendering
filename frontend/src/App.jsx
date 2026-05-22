@@ -12,19 +12,22 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/public/dashboard" replace />} />
-      <Route path="/public/dashboard" element={<PublicDashboard />} />
       <Route path="/login" element={<LoginPage />} />
       
-      <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
+      <Route element={<ProtectedRoute allowedRoles={['Admin', 'admin']} />}>
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
       </Route>
 
-      <Route element={<ProtectedRoute allowedRoles={['pokja']} />}>
+      <Route element={<ProtectedRoute allowedRoles={['Pokja', 'pokja']} />}>
         <Route path="/pokja/dashboard" element={<PokjaDashboard />} />
       </Route>
 
-      <Route element={<ProtectedRoute allowedRoles={['penyedia', 'vendor']} />}>
+      <Route element={<ProtectedRoute allowedRoles={['Penyedia', 'penyedia', 'Vendor', 'vendor']} />}>
         <Route path="/vendor/dashboard" element={<VendorDashboard />} />
+      </Route>
+      
+      <Route element={<ProtectedRoute allowedRoles={['Masyarakat', 'masyarakat']} />}>
+        <Route path="/public/dashboard" element={<PublicDashboard />} />
       </Route>
       
       {/* Fallback route */}

@@ -26,7 +26,7 @@ const LoginPage = () => {
         login(data);
         
         // Redirect based on role
-        const role = data.role || data.pengguna.role;
+        const role = (data.role || data.pengguna.role || '').toLowerCase();
         
         if (role === 'admin') {
           navigate('/admin/dashboard');
