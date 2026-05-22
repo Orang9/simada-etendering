@@ -7,6 +7,7 @@ import LoginPage from './pages/auth/LoginPage';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import PokjaDashboard from './pages/pokja/PokjaDashboard';
 import VendorDashboard from './pages/vendor/VendorDashboard';
+import VendorPenawaranPage from './pages/vendor/VendorPenawaranPage';
 
 import PaketPengadaanPage from './pages/admin/PaketPengadaanPage';
 import DokumenPage from './pages/admin/DokumenPage';
@@ -32,6 +33,7 @@ function App() {
 
       <Route element={<ProtectedRoute allowedRoles={['Penyedia', 'penyedia', 'Vendor', 'vendor']} />}>
         <Route path="/vendor/dashboard" element={<VendorDashboard />} />
+        <Route path="/vendor/penawaran" element={<VendorPenawaranPage />} />
       </Route>
       
       <Route element={<ProtectedRoute allowedRoles={['Masyarakat', 'masyarakat']} />}>

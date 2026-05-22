@@ -31,7 +31,7 @@ const DashboardLayout = ({ children, title = 'Dashboard' }) => {
     { label: 'Dashboard', icon: <LayoutDashboard size={20} />, active: title.includes('Dashboard'), path: `${rolePrefix}/dashboard` },
     { label: 'Data Pengadaan', icon: <FileText size={20} />, active: title === 'Data Pengadaan', path: (userRole === 'admin' || userRole === 'pokja') ? `${rolePrefix}/paket-pengadaan` : '#' },
     { label: 'Dokumen', icon: <FolderOpen size={20} />, active: title === 'Dokumen', path: '#' },
-    { label: 'Penawaran', icon: <Send size={20} />, active: title === 'Penawaran', path: '#' },
+    { label: 'Penawaran', icon: <Send size={20} />, active: title === 'Penawaran', path: (userRole === 'penyedia' || userRole === 'vendor') ? `${rolePrefix}/penawaran` : '#' },
     { label: 'Evaluasi', icon: <CheckSquare size={20} />, active: title === 'Evaluasi', path: '#' },
     { label: 'Pemenang Tender', icon: <Award size={20} />, active: title === 'Pemenang Tender', path: '#' },
     { label: 'Laporan', icon: <BarChart size={20} />, active: title === 'Laporan', path: '#' },
