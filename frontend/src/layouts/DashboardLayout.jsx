@@ -30,7 +30,6 @@ const DashboardLayout = ({ children, title = 'Dashboard' }) => {
   const allMenuItems = [
     { label: 'Dashboard', icon: <LayoutDashboard size={20} />, active: title.includes('Dashboard'), path: `${rolePrefix}/dashboard`, roles: ['admin', 'pokja', 'penyedia', 'vendor', 'masyarakat', 'public'] },
     { label: 'Data Pengadaan', icon: <FileText size={20} />, active: title === 'Data Pengadaan', path: `${rolePrefix}/paket-pengadaan`, roles: ['admin', 'pokja'] },
-    { label: 'Dokumen', icon: <FolderOpen size={20} />, active: title === 'Dokumen', path: '#', roles: ['admin', 'pokja'] },
     { label: 'Penawaran', icon: <Send size={20} />, active: title === 'Penawaran', path: `${rolePrefix}/penawaran`, roles: ['admin', 'penyedia', 'vendor'] },
     { label: 'Evaluasi', icon: <CheckSquare size={20} />, active: title === 'Evaluasi Penawaran', path: `${rolePrefix}/evaluasi`, roles: ['admin', 'pokja'] },
     { label: 'Pemenang Tender', icon: <Award size={20} />, active: title === 'Pemenang Tender', path: `${rolePrefix}/pemenang-tender`, roles: ['admin', 'pokja'] },
