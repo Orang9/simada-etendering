@@ -25,17 +25,19 @@ const DashboardLayout = ({ children, title = 'Dashboard' }) => {
   };
 
   const userRole = user?.role?.toLowerCase() || 'public';
-  const rolePrefix = userRole === 'admin' ? '/admin' : userRole === 'pokja' ? '/pokja' : userRole === 'penyedia' ? '/vendor' : '/public';
+  const rolePrefix = userRole === 'admin' ? '/admin' : userRole === 'pokja' ? '/pokja' : (userRole === 'penyedia' || userRole === 'vendor') ? '/vendor' : '/public';
 
-  const menuItems = [
-    { label: 'Dashboard', icon: <LayoutDashboard size={20} />, active: title.includes('Dashboard'), path: `${rolePrefix}/dashboard` },
-    { label: 'Data Pengadaan', icon: <FileText size={20} />, active: title === 'Data Pengadaan', path: (userRole === 'admin' || userRole === 'pokja') ? `${rolePrefix}/paket-pengadaan` : '#' },
-    { label: 'Dokumen', icon: <FolderOpen size={20} />, active: title === 'Dokumen', path: '#' },
-    { label: 'Penawaran', icon: <Send size={20} />, active: title === 'Penawaran', path: (userRole === 'penyedia' || userRole === 'vendor') ? `${rolePrefix}/penawaran` : '#' },
-    { label: 'Evaluasi', icon: <CheckSquare size={20} />, active: title === 'Evaluasi', path: '#' },
-    { label: 'Pemenang Tender', icon: <Award size={20} />, active: title === 'Pemenang Tender', path: '#' },
-    { label: 'Laporan', icon: <BarChart size={20} />, active: title === 'Laporan', path: '#' },
+  const allMenuItems = [
+    { label: 'Dashboard', icon: <LayoutDashboard size={20} />, active: title.includes('Dashboard'), path: `${rolePrefix}/dashboard`, roles: ['admin', 'pokja', 'penyedia', 'vendor', 'masyarakat', 'public'] },
+    { label: 'Data Pengadaan', icon: <FileText size={20} />, active: title === 'Data Pengadaan', path: `${rolePrefix}/paket-pengadaan`, roles: ['admin', 'pokja'] },
+    { label: 'Dokumen', icon: <FolderOpen size={20} />, active: title === 'Dokumen', path: '#', roles: ['admin', 'pokja'] },
+    { label: 'Penawaran', icon: <Send size={20} />, active: title === 'Penawaran', path: `${rolePrefix}/penawaran`, roles: ['admin', 'penyedia', 'vendor'] },
+    { label: 'Evaluasi', icon: <CheckSquare size={20} />, active: title === 'Evaluasi', path: '#', roles: ['admin', 'pokja'] },
+    { label: 'Pemenang Tender', icon: <Award size={20} />, active: title === 'Pemenang Tender', path: '#', roles: ['admin', 'pokja'] },
+    { label: 'Laporan', icon: <BarChart size={20} />, active: title === 'Laporan', path: '#', roles: ['admin', 'pokja'] },
   ];
+
+  const menuItems = allMenuItems.filter(item => item.roles.includes(userRole));
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col md:flex-row">

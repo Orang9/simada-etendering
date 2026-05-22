@@ -5,13 +5,25 @@ import { useAuth } from '../context/AuthContext';
 const ProtectedRoute = ({ allowedRoles }) => {
   const { user } = useAuth();
 
-  // Basic check for placeholder
   if (!user) {
     return <Navigate to="/login" replace />;
   }
 
-  if (allowedRoles && !allowedRoles.includes(user.role)) {
-    return <Navigate to="/unauthorized" replace />;
+  const lowerRole = user.role ? user.role.toLowerCase() : '';
+  const isSuperUser = lowerRole === 'admin';
+
+  // Check role authorization
+  if (!isSuperUser && allowedRoles && !allowedRoles.map(r => r.toLowerCase()).includes(lowerRole)) {
+    // If not allowed, redirect to their specific dashboard
+    let redirectPath = '/public/dashboard';
+    
+    if (lowerRole === 'pokja') {
+      redirectPath = '/pokja/dashboard';
+    } else if (lowerRole === 'penyedia' || lowerRole === 'vendor') {
+      redirectPath = '/vendor/dashboard';
+    }
+    
+    return <Navigate to={redirectPath} replace />;
   }
 
   return <Outlet />;
