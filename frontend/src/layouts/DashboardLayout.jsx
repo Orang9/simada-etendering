@@ -34,7 +34,7 @@ const DashboardLayout = ({ children, title = 'Dashboard' }) => {
     { label: 'Penawaran', icon: <Send size={20} />, active: title === 'Penawaran', path: `${rolePrefix}/penawaran`, roles: ['admin', 'penyedia', 'vendor'] },
     { label: 'Evaluasi', icon: <CheckSquare size={20} />, active: title === 'Evaluasi Penawaran', path: `${rolePrefix}/evaluasi`, roles: ['admin', 'pokja'] },
     { label: 'Pemenang Tender', icon: <Award size={20} />, active: title === 'Pemenang Tender', path: `${rolePrefix}/pemenang-tender`, roles: ['admin', 'pokja'] },
-    { label: 'Laporan', icon: <BarChart size={20} />, active: title === 'Laporan', path: '#', roles: ['admin', 'pokja'] },
+    { label: 'Laporan', icon: <BarChart size={20} />, active: title === 'Laporan & Analytics', path: `${rolePrefix}/laporan`, roles: ['admin', 'pokja'] },
   ];
 
   const menuItems = allMenuItems.filter(item => item.roles.includes(userRole));

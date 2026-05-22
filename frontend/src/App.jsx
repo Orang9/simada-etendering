@@ -14,6 +14,7 @@ import DokumenPage from './pages/admin/DokumenPage';
 
 import EvaluasiPage from './pages/admin/EvaluasiPage';
 import PemenangPage from './pages/admin/PemenangPage';
+import LaporanPage from './pages/admin/LaporanPage';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="/admin/paket-pengadaan/:id/dokumen" element={<DokumenPage />} />
         <Route path="/admin/evaluasi" element={<EvaluasiPage />} />
         <Route path="/admin/pemenang-tender" element={<PemenangPage />} />
+        <Route path="/admin/laporan" element={<LaporanPage />} />
       </Route>
 
       <Route element={<ProtectedRoute allowedRoles={['Pokja', 'pokja']} />}>
@@ -36,6 +38,7 @@ function App() {
         <Route path="/pokja/paket-pengadaan/:id/dokumen" element={<DokumenPage />} />
         <Route path="/pokja/evaluasi" element={<EvaluasiPage />} />
         <Route path="/pokja/pemenang-tender" element={<PemenangPage />} />
+        <Route path="/pokja/laporan" element={<LaporanPage />} />
       </Route>
 
       <Route element={<ProtectedRoute allowedRoles={['Penyedia', 'penyedia', 'Vendor', 'vendor']} />}>
