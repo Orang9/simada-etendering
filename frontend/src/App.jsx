@@ -27,6 +27,7 @@ function App() {
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
         <Route path="/admin/paket-pengadaan" element={<PaketPengadaanPage />} />
         <Route path="/admin/paket-pengadaan/:id/dokumen" element={<DokumenPage />} />
+        <Route path="/admin/penawaran" element={<VendorPenawaranPage />} />
         <Route path="/admin/evaluasi" element={<EvaluasiPage />} />
         <Route path="/admin/pemenang-tender" element={<PemenangPage />} />
         <Route path="/admin/laporan" element={<LaporanPage />} />
@@ -36,6 +37,7 @@ function App() {
         <Route path="/pokja/dashboard" element={<PokjaDashboard />} />
         <Route path="/pokja/paket-pengadaan" element={<PaketPengadaanPage />} />
         <Route path="/pokja/paket-pengadaan/:id/dokumen" element={<DokumenPage />} />
+        <Route path="/pokja/penawaran" element={<VendorPenawaranPage />} />
         <Route path="/pokja/evaluasi" element={<EvaluasiPage />} />
         <Route path="/pokja/pemenang-tender" element={<PemenangPage />} />
         <Route path="/pokja/laporan" element={<LaporanPage />} />

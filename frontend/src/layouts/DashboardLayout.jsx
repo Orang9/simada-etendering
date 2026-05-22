@@ -39,15 +39,14 @@ const DashboardLayout = ({ children, title = 'Dashboard' }) => {
   const menuItems = allMenuItems.filter(item => item.roles.includes(userRole));
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col md:flex-row">
+    <div className="min-h-screen bg-slate-50 flex">
       {/* Sidebar */}
-      <aside className={`bg-white border-r border-slate-200 text-slate-700 w-64 flex-shrink-0 transition-all duration-300 flex flex-col fixed md:relative z-30 h-full shadow-sm ${sidebarOpen ? 'translate-x-0' : '-translate-x-full md:-translate-x-64'}`}>
+      <aside className={`fixed inset-y-0 left-0 bg-white border-r border-slate-200 text-slate-700 w-64 transition-transform duration-300 flex flex-col z-30 shadow-sm ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         {/* Brand in Sidebar */}
         <div className="h-16 flex items-center px-6 bg-white border-b border-slate-200 justify-between">
           <div className="flex items-center">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-600 to-indigo-600 flex items-center justify-center text-white mr-3 font-bold text-lg shadow-sm">
-              S
-            </div>
+            <img src="/logo.png" alt='Logo SIMADA' className="w-12 h-16 bg-gradient-to-br from-brand-600 to-indigo-600 flex items-center justify-center text-white mr-3 font-bold text-lg shadow-sm">
+            </img>
             <span className="text-sm font-bold text-slate-800 tracking-tight leading-tight">
               SIMADA<br/>KEBUMEN
             </span>
@@ -88,7 +87,7 @@ const DashboardLayout = ({ children, title = 'Dashboard' }) => {
       </aside>
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col min-w-0 overflow-hidden relative h-screen">
+      <div className={`flex-1 flex flex-col min-w-0 h-screen transition-all duration-300 ${sidebarOpen ? 'md:ml-64' : 'ml-0'}`}>
         
         {/* Top Navbar: Blue/Purple styling */}
         <header className="h-16 bg-gradient-to-r from-brand-600 to-indigo-700 flex items-center justify-between px-6 relative z-20 shadow-md">
