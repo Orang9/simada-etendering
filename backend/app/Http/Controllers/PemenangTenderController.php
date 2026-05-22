@@ -130,6 +130,11 @@ class PemenangTenderController extends Controller
             'catatan_penetapan' => $request->catatan_penetapan,
         ]);
 
+        $paket = \App\Models\PaketPengadaan::find($request->paket_id);
+        if ($paket) {
+            $paket->update(['status' => 'close']);
+        }
+
         return response()->json($pemenang, 201);
     }
 }
