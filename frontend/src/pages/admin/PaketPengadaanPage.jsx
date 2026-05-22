@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import DashboardLayout from '../../layouts/DashboardLayout';
 import api from '../../api/axios';
-import { Search, Plus, Eye, X } from 'lucide-react';
+import { Search, Plus, Eye, X, FileText } from 'lucide-react';
 
 const PaketPengadaanPage = () => {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  const rolePrefix = user?.role?.toLowerCase() === 'admin' ? '/admin' : '/pokja';
+  
   const [pakets, setPakets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
@@ -103,8 +109,15 @@ const PaketPengadaanPage = () => {
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-center">
-                      <button className="text-brand-600 hover:text-brand-800 p-1.5 hover:bg-brand-50 rounded-lg transition-colors inline-flex items-center" title="Detail Paket">
+                      <button className="text-brand-600 hover:text-brand-800 p-1.5 hover:bg-brand-50 rounded-lg transition-colors inline-flex items-center mr-1" title="Detail Paket">
                         <Eye size={18} />
+                      </button>
+                      <button 
+                        onClick={() => navigate(`${rolePrefix}/paket-pengadaan/${paket.paket_id}/dokumen`)}
+                        className="text-indigo-600 hover:text-indigo-800 p-1.5 hover:bg-indigo-50 rounded-lg transition-colors inline-flex items-center" 
+                        title="Dokumen Tender"
+                      >
+                        <FileText size={18} />
                       </button>
                     </td>
                   </tr>
