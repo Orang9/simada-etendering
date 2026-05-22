@@ -14,6 +14,7 @@ const PaketPengadaanPage = () => {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedDetailPaket, setSelectedDetailPaket] = useState(null);
   
   const fetchPakets = async () => {
     setLoading(true);
@@ -109,7 +110,11 @@ const PaketPengadaanPage = () => {
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-center">
-                      <button className="text-brand-600 hover:text-brand-800 p-1.5 hover:bg-brand-50 rounded-lg transition-colors inline-flex items-center mr-1" title="Detail Paket">
+                      <button 
+                        onClick={() => setSelectedDetailPaket(paket)}
+                        className="text-brand-600 hover:text-brand-800 p-1.5 hover:bg-brand-50 rounded-lg transition-colors inline-flex items-center mr-1" 
+                        title="Detail Paket"
+                      >
                         <Eye size={18} />
                       </button>
                       <button 
@@ -136,6 +141,14 @@ const PaketPengadaanPage = () => {
             setIsModalOpen(false);
             fetchPakets();
           }} 
+        />
+      )}
+
+      {/* Modal Detail Paket */}
+      {selectedDetailPaket && (
+        <DetailPaketModal 
+          paket={selectedDetailPaket} 
+          onClose={() => setSelectedDetailPaket(null)} 
         />
       )}
     </DashboardLayout>
@@ -209,26 +222,36 @@ const AddPaketModal = ({ onClose, onSuccess }) => {
             
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1.5">OPD ID</label>
-                <input 
-                  type="number" 
+                <label className="block text-sm font-medium text-slate-700 mb-1.5">OPD</label>
+                <select 
                   name="opd_id"
                   required
                   value={formData.opd_id}
                   onChange={handleChange}
                   className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent text-sm bg-slate-50 focus:bg-white transition-colors"
-                />
+                >
+                  <option value="1">Dinas Kesehatan</option>
+                  <option value="2">Dinas Pendidikan</option>
+                  <option value="3">Dinas Pekerjaan Umum</option>
+                  <option value="4">Dinas Komunikasi dan Informatika</option>
+                  <option value="5">Sekretariat Daerah</option>
+                </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1.5">Metode ID</label>
-                <input 
-                  type="number" 
+                <label className="block text-sm font-medium text-slate-700 mb-1.5">Metode Pengadaan</label>
+                <select 
                   name="metode_id"
                   required
                   value={formData.metode_id}
                   onChange={handleChange}
                   className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent text-sm bg-slate-50 focus:bg-white transition-colors"
-                />
+                >
+                  <option value="1">Tender Cepat</option>
+                  <option value="2">Tender Umum</option>
+                  <option value="3">Penunjukan Langsung</option>
+                  <option value="4">Pengadaan Langsung</option>
+                  <option value="5">E-Purchasing</option>
+                </select>
               </div>
             </div>
 
@@ -272,3 +295,95 @@ const AddPaketModal = ({ onClose, onSuccess }) => {
 };
 
 export default PaketPengadaanPage;
+
+const DetailPaketModal = ({ paket, onClose }) => {
+  const [dokumens, setDokumens] = useState([]);
+  const [loadingDocs, setLoadingDocs] = useState(true);
+
+  useEffect(() => {
+    const fetchDocs = async () => {
+      try {
+        const response = await api.get(`/paket-pengadaan/${paket.paket_id}/dokumen`);
+        setDokumens(response.data);
+      } catch (err) {
+        console.error("Failed to fetch docs", err);
+      } finally {
+        setLoadingDocs(false);
+      }
+    };
+    fetchDocs();
+  }, [paket.paket_id]);
+
+  return (
+    <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] flex flex-col animate-in fade-in zoom-in-95 duration-200">
+        
+        <div className="px-6 py-4 border-b border-slate-100 flex justify-between items-center bg-slate-50/80">
+          <h3 className="text-lg font-bold text-slate-800">Detail Paket Pengadaan</h3>
+          <button onClick={onClose} className="text-slate-400 hover:text-slate-600 p-1 hover:bg-slate-200 rounded-lg transition-colors">
+            <X size={20} />
+          </button>
+        </div>
+        
+        <div className="flex-1 overflow-y-auto p-6 space-y-6">
+          
+          <div className="bg-slate-50 border border-slate-100 p-5 rounded-2xl">
+            <h4 className="text-xl font-bold text-slate-800 mb-4">{paket.nama_paket}</h4>
+            <div className="grid grid-cols-2 gap-y-4 gap-x-6 text-sm">
+              <div>
+                <p className="text-slate-500 font-medium mb-1">Status</p>
+                <span className={`px-3 py-1 rounded-full text-xs font-semibold border inline-block ${
+                  paket.status === 'open' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 
+                  paket.status === 'close' ? 'bg-slate-100 text-slate-700 border-slate-200' :
+                  'bg-amber-50 text-amber-700 border-amber-200'
+                }`}>
+                  {paket.status.toUpperCase()}
+                </span>
+              </div>
+              <div>
+                <p className="text-slate-500 font-medium mb-1">OPD</p>
+                <p className="font-semibold text-slate-800">{paket.opd?.nama_opd || paket.opd_id}</p>
+              </div>
+              <div>
+                <p className="text-slate-500 font-medium mb-1">Metode Pengadaan</p>
+                <p className="font-semibold text-slate-800">{paket.metode?.nama_metode || paket.metode_id}</p>
+              </div>
+              <div>
+                <p className="text-slate-500 font-medium mb-1">Anggaran Pagu</p>
+                <p className="font-bold text-emerald-600">
+                  Rp {Number(paket.anggaran?.pagu || 0).toLocaleString('id-ID')}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h4 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-3">Dokumen Tender</h4>
+            {loadingDocs ? (
+              <div className="flex justify-center items-center py-4 text-slate-500 text-sm">
+                <div className="w-5 h-5 border-2 border-brand-600 border-t-transparent rounded-full animate-spin mr-2"></div>
+                Memuat dokumen...
+              </div>
+            ) : dokumens.length === 0 ? (
+              <div className="bg-slate-50 border border-slate-100 rounded-xl p-4 text-center text-sm text-slate-500">
+                Tidak ada dokumen yang dilampirkan pada paket ini.
+              </div>
+            ) : (
+              <ul className="grid sm:grid-cols-2 gap-3">
+                {dokumens.map(doc => (
+                  <li key={doc.dokumen_id} className="flex items-center p-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 transition-colors shadow-sm">
+                    <FileText size={18} className="text-indigo-500 mr-3 shrink-0" />
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-semibold text-slate-700 truncate">{doc.nama_file}</p>
+                      <p className="text-xs text-slate-500">{doc.jenis_dokumen}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
