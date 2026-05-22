@@ -75,7 +75,7 @@ Route::middleware(['simple.auth'])->group(function () {
         Route::post('/admin/paket-pengadaan', [PaketPengadaanController::class, 'store']);
         Route::put('/admin/paket-pengadaan/{id}', [PaketPengadaanController::class, 'update']);
         Route::delete('/admin/paket-pengadaan/{id}', [PaketPengadaanController::class, 'destroy']);
-        Route::patch('/admin/paket-pengadaan/{id}/publish', [PaketPengadaanController::class, 'publish']);
+        Route::patch('/admin/paket-pengadaan/{id}/open', [PaketPengadaanController::class, 'publish']);
 
         Route::post('/admin/paket-pengadaan/{paket_id}/dokumen', [DokumenController::class, 'store']);
         Route::delete('/admin/dokumen/{dokumen_id}', [DokumenController::class, 'destroy']);
