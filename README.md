@@ -6,6 +6,18 @@ Project ini dibuat sebagai prototype sistem pengadaan elektronik pemerintah daer
 
 ---
 
+# Project Objectives
+
+The SIMADA e-Tendering System aims to:
+
+- Digitalize procurement processes
+- Improve procurement transparency
+- Simplify vendor bidding process
+- Provide centralized tender management
+- Support procurement reporting & analytics
+
+---
+
 # Features
 
 ## Authentication & Authorization
@@ -16,6 +28,7 @@ Project ini dibuat sebagai prototype sistem pengadaan elektronik pemerintah daer
 - Session/token authentication
 
 ### Halaman Login
+
 ![Login Page](./screenshots/login-page.png)
 
 ## Procurement Management
@@ -25,18 +38,23 @@ Project ini dibuat sebagai prototype sistem pengadaan elektronik pemerintah daer
 - Status Paket (`open` / `close`)
 
 ### Halaman Data Pengadaan (Admin/Pokja)
+
 ![Data Pengadaan Page](./screenshots/data-pengadaan-page.png)
 
 ### Tambah Paket Pengadaan
+
 ![Tambah Paket Pengadaan](./screenshots/tambah-paket-pengadaan.png)
 
 ### Detail Paket Pengadaan
+
 ![Detail Paket Pengadaan](./screenshots/detail-paket-pengadaan.png)
 
 ### Dokumen Tender
+
 ![Dokumen Tender Page](./screenshots/dokumen-tender-page.png)
 
 ### Upload Dokumen Tender
+
 ![Upload Dokumen](./screenshots/upload-dokumen.png)
 
 ## Vendor Bidding
@@ -46,10 +64,12 @@ Project ini dibuat sebagai prototype sistem pengadaan elektronik pemerintah daer
 - Riwayat penawaran penyedia
 
 ### Halaman Penawaran Vendor
+
 ![Penawaran Page](./screenshots/penawaran-page.png)
 ![Penawaran Page Setelah Kirim](./screenshots/penawaran-page-after.png)
 
 ### Detail dan Submit Penawaran
+
 ![Detail dan Submit Penawaran](./screenshots/detail-dan-submit-penawaran.png)
 
 ## Bid Evaluation
@@ -62,10 +82,12 @@ Project ini dibuat sebagai prototype sistem pengadaan elektronik pemerintah daer
   - Tidak Lolos
 
 ### Halaman Evaluasi Penawaran
+
 ![Evaluasi Penawaran Page](./screenshots/evaluasi-penawaran-page.png)
 ![Evaluasi Penawaran Page Setelah Evaluasi](./screenshots/evaluasi-penawaran-page-after.png)
 
 ### Form/Modal Input Evaluasi
+
 ![Beri Evaluasi](./screenshots/beri-evaluasi.png)
 
 ## Winner Selection
@@ -74,10 +96,12 @@ Project ini dibuat sebagai prototype sistem pengadaan elektronik pemerintah daer
 - Otomatis menutup paket pengadaan setelah pemenang ditentukan
 
 ### Halaman Penetapan Pemenang Tender
+
 ![Daftar Pemenang Tender Page](./screenshots/daftar-pemenang-tender-page.png)
 ![Daftar Pemenang Tender Page Setelah Penetapan](./screenshots/daftar-pemenang-tender-page-after.png)
 
 ### Form/Modal Tetapkan Pemenang
+
 ![Tetapkan Pemenang Tender](./screenshots/tetapkan-pemenang-tender.png)
 
 ## Dashboard & Reporting
@@ -93,9 +117,11 @@ Project ini dibuat sebagai prototype sistem pengadaan elektronik pemerintah daer
 - Grafik analytics
 
 ### Dashboard Analytics (Admin)
+
 ![Dashboard Page](./screenshots/dashboard-page.png)
 
 ### Halaman Laporan & Analytics
+
 ![Laporan Page](./screenshots/laporan-page.png)
 
 ---
@@ -121,6 +147,53 @@ Project ini dibuat sebagai prototype sistem pengadaan elektronik pemerintah daer
 
 ---
 
+# System Requirements
+
+## Backend Requirements
+
+| Software | Version |
+| -------- | ------- |
+| PHP      | >= 8.2  |
+| Composer | >= 2.0  |
+| Laravel  | >= 11   |
+| MySQL    | >= 8.0  |
+
+## Frontend Requirements
+
+| Software | Version |
+| -------- | ------- |
+| Node.js  | >= 20   |
+| npm      | >= 10   |
+| React    | Latest  |
+| Vite     | Latest  |
+
+---
+
+# System Architecture
+
+┌─────────────────────────────┐
+│ Frontend │
+│ React + Vite + TailwindCSS │
+│ Role-based Dashboard │
+└──────────────┬──────────────┘
+│ REST API
+▼
+┌─────────────────────────────┐
+│ Backend │
+│ Laravel │
+│ Authentication & Business │
+│ Logic │
+└──────────────┬──────────────┘
+│
+▼
+┌─────────────────────────────┐
+│ Database │
+│ MySQL │
+│ Procurement & Tender Data │
+└─────────────────────────────┘
+
+---
+
 # System Roles
 
 | Role       | Access                         |
@@ -129,6 +202,21 @@ Project ini dibuat sebagai prototype sistem pengadaan elektronik pemerintah daer
 | Pokja      | Tender management & evaluation |
 | Penyedia   | Submit penawaran               |
 | Masyarakat | Public information access      |
+
+---
+
+# Role Permission Matrix
+
+| Feature                    | Admin | Pokja | Penyedia | Public |
+| -------------------------- | ----- | ----- | -------- | ------ |
+| Login System               | ✅    | ✅    | ✅       | ❌     |
+| Manage Procurement Package | ✅    | ✅    | ❌       | ❌     |
+| Upload Tender Document     | ✅    | ✅    | ❌       | ❌     |
+| Submit Bid                 | ❌    | ❌    | ✅       | ❌     |
+| Evaluate Bid               | ✅    | ✅    | ❌       | ❌     |
+| Select Winner              | ✅    | ✅    | ❌       | ❌     |
+| View Public Information    | ✅    | ✅    | ✅       | ✅     |
+| Generate Report            | ✅    | ✅    | ❌       | ❌     |
 
 ---
 
@@ -142,6 +230,33 @@ Paket Pengadaan
 → Penetapan Pemenang
 → Laporan & Dashboard
 ```
+
+---
+
+# Authentication Flow
+
+User Login
+↓
+Laravel Authentication
+↓
+Token Generation
+↓
+Role Validation
+↓
+Protected Dashboard Access
+
+---
+
+# Database Documentation
+
+| Entity          | Description                    |
+| --------------- | ------------------------------ |
+| users           | Menyimpan data pengguna sistem |
+| paket_pengadaan | Data paket tender/pengadaan    |
+| dokumen_tender  | Dokumen tender yang diupload   |
+| penawaran       | Data penawaran vendor          |
+| evaluasi        | Hasil evaluasi tender          |
+| pemenang_tender | Data pemenang tender           |
 
 ---
 
@@ -246,7 +361,7 @@ http://localhost:5173
 
 ---
 
-# API Overview
+# API Documentation
 
 ## Authentication
 
@@ -254,6 +369,22 @@ http://localhost:5173
 | ------ | ----------- |
 | POST   | /api/login  |
 | POST   | /api/logout |
+
+---
+
+# API Documentation
+
+## API Base URL
+
+http://127.0.0.1:8000/api
+
+## API Response Example
+
+{
+"success": true,
+"message": "Login successful",
+"token": "access_token_here"
+}
 
 ---
 
@@ -346,6 +477,74 @@ src/
 backend/
 frontend/
 ```
+
+---
+
+# Security Documentation
+
+## Security Features
+
+The system implements several security mechanisms:
+
+- Authentication & Authorization
+- Role-based Access Control (RBAC)
+- Protected API Routes
+- Token-based Session Authentication
+- Form Validation
+- Secure File Upload Validation
+- Access Restriction by Role
+- Input Validation & Sanitization
+
+## Authentication Security
+
+The authentication system uses:
+
+- Protected login endpoint
+- Token/session validation
+- Middleware route protection
+- Role validation before dashboard access
+
+## File Upload Security
+
+Uploaded tender documents are validated using:
+
+- File type validation
+- File size limitation
+- Protected upload endpoint
+
+---
+
+# Reporting & Analytics Documentation
+
+The reporting and analytics module provides monitoring and reporting features for procurement activities within the SIMADA e-Tendering System.
+
+## Available Reports
+
+- Procurement Package Report
+- Vendor Bid Report
+- Bid Evaluation Report
+- Tender Winner Report
+
+## Analytics Features
+
+The dashboard analytics feature provides visualization and monitoring for procurement activities such as:
+
+- Total procurement packages
+- Total vendors
+- Total submitted bids
+- Total completed evaluations
+- Tender winner statistics
+
+## Export Features
+
+The system supports report export functionality in multiple formats:
+
+- PDF Export
+- Excel Export
+
+## Visualization
+
+Analytics data is visualized using charts and dashboard widgets to improve readability and monitoring efficiency.
 
 ---
 
